@@ -12,15 +12,8 @@ const Todo = db.define("Todos", {
     },
     status: {
         type: Sequelize.BOOLEAN,
-    },
-    created_at: {
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.NOW,
-    },
-    updated_at: {
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.NOW,
-    },
+    }
+    //created_at and updated_at are created automatically by sequelize
 });
 
 module.exports = Todo;

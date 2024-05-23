@@ -7,6 +7,7 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
 const userRouter = require("./routes/user_routes");
+const projectRouter = require("./routes/project_route");
 
 const app = express();
 
@@ -17,9 +18,10 @@ app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 app.use(cors());
 
 app.use("/api/v2", userRouter);
+app.use("/api/v2", projectRouter);
 
-db.sync().then(() => {
+db.sync({ force: false }).then(() => {
     app.listen(5270, () => {
-        console.log("Server started on port 3000");
+        console.log("Server started on port 5270");
     });
 });

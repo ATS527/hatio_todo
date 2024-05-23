@@ -12,11 +12,8 @@ const Project = db.define("Projects", {
     },
     todos: {
         type: Sequelize.ARRAY(Sequelize.STRING),
-    },
-    created_at: {
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.NOW,
     }
+    //created_at and updated_at are created automatically by sequelize
 });
 
 module.exports = Project;
