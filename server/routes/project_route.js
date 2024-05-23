@@ -7,7 +7,8 @@ const {
 const {
     createProject,
     getUserProjects,
-    getProjectDetails
+    getProjectDetails,
+    updateProjectTitle
 } = require('../controllers/project_controller');
 
 projectRouter.post('/createProject', isAuthenticatedUser, createProject);
@@ -15,6 +16,8 @@ projectRouter.post('/createProject', isAuthenticatedUser, createProject);
 projectRouter.get('/getUserProjects', isAuthenticatedUser, getUserProjects);
 
 projectRouter.get('/getProjectDetails/:id', isAuthenticatedUser, getProjectDetails);
+
+projectRouter.put('/updateProjectTitle/:id', isAuthenticatedUser, updateProjectTitle);
 
 module.exports = projectRouter;
 

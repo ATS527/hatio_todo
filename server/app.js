@@ -8,6 +8,7 @@ const cors = require("cors");
 
 const userRouter = require("./routes/user_routes");
 const projectRouter = require("./routes/project_route");
+const todoRouter = require("./routes/todo_routes");
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use(cors());
 
 app.use("/api/v2", userRouter);
 app.use("/api/v2", projectRouter);
+app.use("/api/v2", todoRouter);
 
 db.sync({ force: false }).then(() => {
     app.listen(5270, () => {

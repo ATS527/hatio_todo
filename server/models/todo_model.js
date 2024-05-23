@@ -12,6 +12,7 @@ const Todo = db.define("Todos", {
     },
     status: {
         type: Sequelize.BOOLEAN,
+        defaultValue: false
     }
     //created_at and updated_at are created automatically by sequelize
 });

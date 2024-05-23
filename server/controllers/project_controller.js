@@ -56,3 +56,26 @@ exports.getProjectDetails = asyncHandler(
         });
     }
 );
+
+exports.updateProjectTitle = asyncHandler(
+    async (req, res) => {
+        const title = req.body.title;
+        const project = await Project.findByPk(req.params.id);
+
+        if (project === null) {
+            return res.status(404).json({
+                success: false,
+                message: "Project not found",
+            });
+        }
+
+        await project.update({
+            title,
+        });
+
+        res.status(200).json({
+            success: true,
+            project,
+        });
+    }
+);
