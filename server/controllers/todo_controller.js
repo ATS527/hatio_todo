@@ -34,6 +34,13 @@ exports.getProjectTodos = asyncHandler(
             attributes: ["todos"],
         });
 
+        if (!projectTodos) {
+            return res.status(404).json({
+                success: false,
+                message: "Project is empty",
+            });
+        }
+
         const todos = [];
 
         for (let i = 0; i < projectTodos.todos.length; i++) {
@@ -70,7 +77,14 @@ exports.updateTodo = asyncHandler(
 
 exports.deleteTodo = asyncHandler(
     async (req, res) => {
-        const todo = await Todo.findByPk(req.params.id);
+        const { project_id, todo_id } = req.body;
+        const project = await Project.findByPk(project_id);
+
+        project.todos = project.todos.filter((todo) => todo !== todo_id);
+        await project.save();
+
+        const todo = await Todo.findByPk(todo_id);
+
         await todo.destroy();
         res.status(200).json({
             success: true,

@@ -17,6 +17,6 @@ todoRouter.get('/getProjectTodos/:id', isAuthenticatedUser, getProjectTodos);
 
 todoRouter.put('/updateTodo/:id', isAuthenticatedUser, updateTodo);
 
-todoRouter.delete('/deleteTodo/:id', isAuthenticatedUser, deleteTodo);
+todoRouter.delete('/deleteTodo', isAuthenticatedUser, deleteTodo);
 
 module.exports = todoRouter;

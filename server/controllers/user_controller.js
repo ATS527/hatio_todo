@@ -5,6 +5,17 @@ const bcrypt = require("bcryptjs");
 
 exports.createUser = asyncHandler(
     async (req, res) => {
+        const { email } = req.body;
+
+        const userExists = await User.findOne({ where: { email } });
+
+        if (userExists) {
+            return res.status(500).json({
+                success: false,
+                message: "User already exists",
+            });
+        }
+
         const user = await User.create(req.body);
         sendToken(user, 200, res);
     }
