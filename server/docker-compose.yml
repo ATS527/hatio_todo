@@ -1,0 +1,25 @@
+version: '1'
+services:
+  postgresdb:
+    image: postgres
+    restart: unless-stopped
+    shm_size: 128mb
+    environment:
+      - POSTGRES_DB=hatio_todos
+      - POSTGRES_USER=ats527
+      - POSTGRES_PASSWORD=strongPassword#123
+
+  app:
+    build: .
+    ports:
+      - 5270:5270
+    environment:
+      - DB_HOST=postgresdb
+      - DB_PORT=5432
+      - DB_NAME=hatio_todos
+      - DB_USER=ats527
+      - DB_PASSWORD=strongPassword#123
+      - PORT=5270
+    depends_on:
+      - postgresdb
+    restart: unless-stopped

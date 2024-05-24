@@ -1,8 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const db = require("./config/db");
 require("dotenv").config();
-const path = require("path");
+const db = require("./config/db");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
@@ -22,8 +21,10 @@ app.use("/api/v2", userRouter);
 app.use("/api/v2", projectRouter);
 app.use("/api/v2", todoRouter);
 
+const PORT = process.env.PORT;
+
 db.sync({ force: false }).then(() => {
-    app.listen(5270, () => {
-        console.log("Server started on port 5270");
+    app.listen(PORT, () => {
+        console.log(`Server started on port ${PORT}`);
     });
 });

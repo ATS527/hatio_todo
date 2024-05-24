@@ -1,8 +1,7 @@
 const Sequelize = require("sequelize");
 
-//since it is local database we are not storing it in .env file
-const db = new Sequelize("hatio_todos", "ats527", "strongPassword", {
-    host: "localhost",
+const db = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+    host: process.env.DB_HOST,
     dialect: "postgres",
 });
 
