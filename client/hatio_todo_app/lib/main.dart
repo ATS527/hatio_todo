@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hatio_todo_app/auth/views/register_screen.dart';
 import 'package:hatio_todo_app/bloc_observer.dart';
 
 Future<void> main() async {
@@ -19,16 +20,16 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const HomeScreen(),
+      home: const InitialiserScreen(),
     );
   }
 }
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class InitialiserScreen extends StatelessWidget {
+  const InitialiserScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const RegisterScreen();
   }
 }
