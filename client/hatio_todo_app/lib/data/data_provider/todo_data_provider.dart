@@ -1,10 +1,12 @@
+import 'dart:convert';
+
 import 'package:hatio_todo_app/utils/globals.dart';
 import 'package:http/http.dart' as http;
 
 class TodoDataProvider {
   static const _baseUrl = AppConstants.baseUrl;
 
-  Future<String> createTodo(
+  Future<Map<String, dynamic>> createTodoData(
       {required String projectId, required String title}) async {
     try {
       final response = await http.post(
@@ -15,25 +17,26 @@ class TodoDataProvider {
         },
       );
 
-      return response.body;
+      return jsonDecode(response.body);
     } catch (err) {
       throw Exception(err.toString());
     }
   }
 
-  Future getProjectTodos(String projectId) async {
+  Future<Map<String, dynamic>> getProjectTodosData(String projectId) async {
     try {
       final response = await http.get(
         Uri.parse('$_baseUrl/getProjectTodos/$projectId'),
       );
 
-      return response.body;
+      return jsonDecode(response.body);
     } catch (err) {
       throw Exception(err.toString());
     }
   }
 
-  Future updateTodo(String todoId, String title) async {
+  Future<Map<String, dynamic>> updateTodoData(
+      String todoId, String title) async {
     try {
       final response = await http.put(
         Uri.parse("$_baseUrl/updateTodo/$todoId"),
@@ -42,19 +45,24 @@ class TodoDataProvider {
         },
       );
 
-      return response.body;
+      return jsonDecode(response.body);
     } catch (err) {
       throw Exception(err.toString());
     }
   }
 
-  Future deleteTodo(String todoId) async {
+  Future<Map<String, dynamic>> deleteTodoData(
+      String projectId, String todoId) async {
     try {
       final response = await http.delete(
-        Uri.parse("$_baseUrl/deleteTodo/$todoId"),
+        Uri.parse("$_baseUrl/deleteTodo"),
+        body: {
+          "project_id": projectId,
+          "todo_id": todoId,
+        },
       );
 
-      return response.body;
+      return jsonDecode(response.body);
     } catch (err) {
       throw Exception(err.toString());
     }

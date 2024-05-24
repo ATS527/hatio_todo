@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hatio_todo_app/presentation/auth/bloc/auth_bloc.dart';
 import 'package:hatio_todo_app/presentation/project/views/project_screen.dart';
 
 class LoginForm extends StatefulWidget {
@@ -10,6 +12,9 @@ class LoginForm extends StatefulWidget {
 
 class _LoginFormState extends State<LoginForm> {
   final _loginKey = GlobalKey<FormState>();
+
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   String? emailValidation(String? value) {
     if (value == null || value.isEmpty) {
@@ -32,6 +37,7 @@ class _LoginFormState extends State<LoginForm> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: TextFormField(
+              controller: _emailController,
               decoration: const InputDecoration(
                 labelText: 'Email',
               ),
@@ -44,6 +50,7 @@ class _LoginFormState extends State<LoginForm> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: TextFormField(
+              controller: _passwordController,
               decoration: const InputDecoration(
                 labelText: 'Password',
               ),
@@ -57,11 +64,12 @@ class _LoginFormState extends State<LoginForm> {
             child: ElevatedButton(
               onPressed: () {
                 if (_loginKey.currentState!.validate()) {
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => const ProjectScreen(),
-                    ),
-                  );
+                  context.read<AuthBloc>().add(
+                        LoginButtonPressed(
+                          email: _emailController.text,
+                          password: _passwordController.text,
+                        ),
+                      );
                 }
               },
               child: const Text('Submit'),

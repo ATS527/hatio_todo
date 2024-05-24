@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hatio_todo_app/presentation/auth/bloc/auth_bloc.dart';
 import 'package:hatio_todo_app/presentation/project/widgets/create_project_dialog.dart';
 import 'package:hatio_todo_app/presentation/todo/views/todo_screen.dart';
 
@@ -10,6 +12,14 @@ class ProjectScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Projects'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              context.read<AuthBloc>().add(LogoutButtonPressed());
+            },
+            icon: const Icon(Icons.logout),
+          ),
+        ],
       ),
       body: ListView.builder(
           itemCount: 100,

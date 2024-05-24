@@ -15,11 +15,11 @@ class Project {
 
   factory Project.fromJson(Map<String, dynamic> json) {
     return Project(
-      id: json['id'],
-      title: json['title'],
-      todoIds: List<String>.from(json['todoIds']),
-      createdAt: DateTime.parse(json['createdAt']),
-      updatedAt: DateTime.parse(json['updatedAt']),
+      id: json["project"]['id'],
+      title: json["project"]['title'],
+      todoIds: List<String>.from(json["project"]['todoIds']),
+      createdAt: DateTime.parse(json["project"]['createdAt']),
+      updatedAt: DateTime.parse(json["project"]['updatedAt']),
     );
   }
 
@@ -31,5 +31,14 @@ class Project {
       'createdAt': createdAt.toIso8601String(),
       'updatedAt': updatedAt.toIso8601String(),
     };
+  }
+
+  //from map<string,dynamic> to list
+  static List<Project> fromJsontoList(Map<String, dynamic> map) {
+    List<Project> list = [];
+    map.forEach((key, value) {
+      list.add(Project.fromJson(value));
+    });
+    return list;
   }
 }

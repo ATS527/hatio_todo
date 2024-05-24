@@ -1,10 +1,12 @@
+import 'dart:convert';
+
 import 'package:hatio_todo_app/utils/globals.dart';
 import 'package:http/http.dart' as http;
 
 class UserDataProvider {
   static const _baseUrl = AppConstants.baseUrl;
 
-  Future<String> registerUser(
+  Future<Map<String, dynamic>> registerUserData(
       String name, String email, String password) async {
     try {
       final response = await http.post(
@@ -16,13 +18,18 @@ class UserDataProvider {
         },
       );
 
-      return response.body;
+      var decodedResponse = jsonDecode(response.body);
+
+      return decodedResponse;
+
+      // get Map<String, dynamic> from response.body
     } catch (err) {
       throw Exception(err.toString());
     }
   }
 
-  Future loginUser(String email, String password) async {
+  Future<Map<String, dynamic>> loginUserData(
+      String email, String password) async {
     try {
       final response = await http.post(
         Uri.parse('$_baseUrl/login'),
@@ -32,19 +39,31 @@ class UserDataProvider {
         },
       );
 
-      return response.body;
+      return jsonDecode(response.body);
     } catch (err) {
       throw Exception(err.toString());
     }
   }
 
-  Future logoutUser() async {
+  Future<bool> logoutUserData() async {
     try {
-      final response = await http.get(
+      await http.get(
         Uri.parse('$_baseUrl/logout'),
       );
 
-      return response.body;
+      return true;
+    } catch (err) {
+      throw Exception(err.toString());
+    }
+  }
+
+  Future<Map<String, dynamic>> getUserData() async {
+    try {
+      final response = await http.get(
+        Uri.parse('$_baseUrl/me'),
+      );
+
+      return jsonDecode(response.body);
     } catch (err) {
       throw Exception(err.toString());
     }

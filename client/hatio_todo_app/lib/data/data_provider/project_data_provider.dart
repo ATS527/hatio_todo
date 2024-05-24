@@ -1,10 +1,12 @@
+import 'dart:convert';
+
 import 'package:hatio_todo_app/utils/globals.dart';
 import 'package:http/http.dart' as http;
 
 class ProjectDataProvider {
   static const _baseUrl = AppConstants.baseUrl;
 
-  Future createProject(String title) async {
+  Future<Map<String, dynamic>> createProjectData(String title) async {
     try {
       final response = await http.post(
         Uri.parse('$_baseUrl/createProject'),
@@ -13,37 +15,38 @@ class ProjectDataProvider {
         },
       );
 
-      return response.body;
+      return jsonDecode(response.body);
     } catch (err) {
       throw Exception(err.toString());
     }
   }
 
-  Future getUserProjects() async {
+  Future<Map<String, dynamic>> getUserProjectsData() async {
     try {
       final response = await http.get(
         Uri.parse('$_baseUrl/getUserProjects'),
       );
 
-      return response.body;
+      return jsonDecode(response.body);
     } catch (err) {
       throw Exception(err.toString());
     }
   }
 
-  Future getProjectDetails(String id) async {
+  Future<Map<String, dynamic>> getProjectDetailsData(String id) async {
     try {
       final response = await http.get(
         Uri.parse('$_baseUrl/getProjectDetails/$id'),
       );
 
-      return response.body;
+      return jsonDecode(response.body);
     } catch (err) {
       throw Exception(err.toString());
     }
   }
 
-  Future updateProjectTitle({required String id, required String title}) async {
+  Future<Map<String, dynamic>> updateProjectTitleData(
+      {required String id, required String title}) async {
     try {
       final response = await http.put(
         Uri.parse('$_baseUrl/updateProjectTitle/$id'),
@@ -52,7 +55,7 @@ class ProjectDataProvider {
         },
       );
 
-      return response.body;
+      return jsonDecode(response.body);
     } catch (err) {
       throw Exception(err.toString());
     }

@@ -11,9 +11,9 @@ class Todo {
 
   factory Todo.fromJson(Map<String, dynamic> json) {
     return Todo(
-      id: json['id'],
-      title: json['title'],
-      status: json['status'],
+      id: json["todo"]['id'],
+      title: json["todo"]['title'],
+      status: json["todo"]['status'],
     );
   }
 
@@ -23,5 +23,13 @@ class Todo {
       'title': title,
       'status': status,
     };
+  }
+
+  static List<Todo> fromJsonToList(Map<String, dynamic> map) {
+    List<Todo> list = [];
+    map.forEach((key, value) {
+      list.add(Todo.fromJson(value));
+    });
+    return list;
   }
 }
