@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hatio_todo_app/project/views/project_screen.dart';
+import 'package:hatio_todo_app/presentation/auth/views/login_screen.dart';
+import 'package:hatio_todo_app/presentation/project/views/project_screen.dart';
 
 class CustomForm extends StatefulWidget {
   const CustomForm({super.key});
@@ -104,7 +105,13 @@ class _CustomFormState extends State<CustomForm> {
               height: 20,
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const LoginScreen(),
+                  ),
+                );
+              },
               child: const Text('Login'),
             ),
           ],

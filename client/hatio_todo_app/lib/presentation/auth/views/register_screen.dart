@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hatio_todo_app/auth/widgets/custom_form.dart';
+import 'package:hatio_todo_app/presentation/auth/widgets/register_form.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
