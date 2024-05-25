@@ -17,6 +17,8 @@ exports.createUser = asyncHandler(
         }
 
         const user = await User.create(req.body);
+        user.project_ids = [];
+        await user.save();
         sendToken(user, 200, res);
     }
 );
@@ -56,9 +58,11 @@ exports.loginUser = asyncHandler(
 
 exports.logoutUser = asyncHandler(
     async (req, res) => {
-        res.cookie("token", null, {
-            expires: new Date(Date.now()),
+        res.cookie("token", "", {
+            expires: new Date(Date.now(),),
+            secure: true,
             httpOnly: true,
+            sameSite: "none"
         });
 
         res.status(200).json({

@@ -12,7 +12,7 @@ const sendToken = (user, statusCode, res) => {
         ),
         httpOnly: true,
         withCredentials: true,
-        sameSite: "none",
+        sameSite: "None",
         secure: true,
     };
 

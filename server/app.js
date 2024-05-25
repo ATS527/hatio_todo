@@ -15,7 +15,10 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 
-app.use(cors());
+app.use(cors({
+    origin: ["http://localhost:5270", "http://127.0.0.1:5270", "http://locahost:8200", "http://127.0.0.1:8200"],
+    credentials: true
+}));
 
 app.use("/api/v2", userRouter);
 app.use("/api/v2", projectRouter);

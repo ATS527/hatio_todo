@@ -31,18 +31,25 @@ exports.getUserProjects = asyncHandler(
             }
         );
 
-        const projects = [];
+        if (userProjects.project_ids === null) {
+            return res.status(200).json({
+                success: true,
+                project: [],
+            });
+        }
+
+        const project = [];
 
         for (let i = 0; i < userProjects.project_ids.length; i++) {
-            const project = await Project.findByPk(userProjects.project_ids[i], {
+            const projectOne = await Project.findByPk(userProjects.project_ids[i], {
                 attributes: ["id", "title"],
             });
-            projects.push(project);
+            project.push(projectOne);
         }
 
         res.status(200).json({
             success: true,
-            projects,
+            project: project,
         });
     }
 );
