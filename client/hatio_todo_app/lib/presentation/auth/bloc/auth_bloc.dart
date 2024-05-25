@@ -7,16 +7,16 @@ part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  final UserRepository _userRepository;
+  final UserRepository _userRepository = UserRepository();
 
-  AuthBloc(this._userRepository) : super(AuthInitial()) {
+  AuthBloc() : super(AuthInitial()) {
     on<InitialAuthEvent>((event, emit) async {
-      emit(AuthInitial());
+      emit(AuthLoading());
       try {
         User? user = await _userRepository.getUser();
         emit(AuthSuccess(user: user));
       } catch (e) {
-        emit(AuthFailure(message: e.toString()));
+        emit(AuthIdle());
       }
     });
     on<RegisterButtonPressed>((event, emit) async {
@@ -57,5 +57,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthFailure(message: e.toString()));
       }
     });
+
+    on<GoToLogin>((event, emit) {
+      emit(AuthLogin());
+    });
+
+    on<GoToRegister>((event, emit) {
+      emit(AuthRegister());
+    });
   }
 }
+
+final authBloc = AuthBloc();

@@ -6,11 +6,10 @@ part 'todo_event.dart';
 part 'todo_state.dart';
 
 class TodoBloc extends Bloc<TodoEvent, TodoState> {
-  final TodoRepository _todoRepository;
+  // ignore: unused_field
+  final TodoRepository _todoRepository = TodoRepository();
 
-  TodoBloc(this._todoRepository) : super(TodoInitial()) {
-    on<TodoEvent>((event, emit) {
-      // TODO: implement event handler
-    });
+  TodoBloc() : super(TodoInitial()) {
+    on<TodoEvent>((event, emit) {});
   }
 }

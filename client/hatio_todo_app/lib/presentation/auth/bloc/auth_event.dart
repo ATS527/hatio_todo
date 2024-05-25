@@ -5,6 +5,10 @@ sealed class AuthEvent {}
 
 final class InitialAuthEvent extends AuthEvent {}
 
+final class GoToRegister extends AuthEvent {}
+
+final class GoToLogin extends AuthEvent {}
+
 final class RegisterButtonPressed extends AuthEvent {
   final String name;
   final String email;

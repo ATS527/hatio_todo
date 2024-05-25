@@ -21,7 +21,7 @@ class User {
       name: json["user"]['name'],
       email: json["user"]['email'],
       password: json["user"]['password'],
-      projectIds: List<String>.from(json["user"]['project_ids']),
+      projectIds: List<String>.from(json["user"]['project_ids'] ?? []),
       createdAt: DateTime.parse(json["user"]['createdAt']),
     );
   }

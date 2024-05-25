@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:hatio_todo_app/data/model/project.dart';
 import 'package:hatio_todo_app/presentation/todo/widgets/todo_tile.dart';
 
 class TodoScreen extends StatefulWidget {
-  const TodoScreen({super.key});
+  const TodoScreen({super.key, required this.project});
+
+  final Project project;
 
   @override
   State<TodoScreen> createState() => _TodoScreenState();
@@ -13,7 +16,6 @@ class _TodoScreenState extends State<TodoScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     _projectController.text = "Project Name";
     super.initState();
   }
@@ -29,7 +31,6 @@ class _TodoScreenState extends State<TodoScreen> {
             child: IconButton(
               icon: const Icon(Icons.share),
               onPressed: () {
-                print("Sharing success");
               },
             ),
           ),
@@ -45,7 +46,6 @@ class _TodoScreenState extends State<TodoScreen> {
           cursorColor: Colors.black,
           backgroundCursorColor: Colors.black,
           onEditingComplete: () {
-            print("completed");
           },
         ),
       ),

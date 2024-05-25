@@ -1,25 +1,30 @@
 class Project {
   final String id;
   final String title;
-  final List<String> todoIds;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+  final List<String>? todoIds;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
 
   Project({
     required this.id,
     required this.title,
-    required this.todoIds,
-    required this.createdAt,
-    required this.updatedAt,
+    this.todoIds,
+    this.createdAt,
+    this.updatedAt,
   });
 
   factory Project.fromJson(Map<String, dynamic> json) {
+    // final todoList = json["project"]["todos"];
     return Project(
-      id: json["project"]['id'],
-      title: json["project"]['title'],
-      todoIds: List<String>.from(json["project"]['todoIds']),
-      createdAt: DateTime.parse(json["project"]['createdAt']),
-      updatedAt: DateTime.parse(json["project"]['updatedAt']),
+      id: json['id'],
+      title: json['title'],
+      todoIds: json['todoIds'] != null
+          ? List<String>.from(json['todoIds'])
+          : <String>[],
+      createdAt:
+          json['createdAt'] != null ? DateTime.parse(json['createdAt']) : null,
+      updatedAt:
+          json['updatedAt'] != null ? DateTime.parse(json['updatedAt']) : null,
     );
   }
 
@@ -28,17 +33,22 @@ class Project {
       'id': id,
       'title': title,
       'todoIds': todoIds,
-      'createdAt': createdAt.toIso8601String(),
-      'updatedAt': updatedAt.toIso8601String(),
+      'createdAt': createdAt?.toIso8601String() ?? "",
+      'updatedAt': updatedAt?.toIso8601String() ?? "",
     };
   }
 
   //from map<string,dynamic> to list
-  static List<Project> fromJsontoList(Map<String, dynamic> map) {
+  static List<Project> fromJsontoList(Map<String, dynamic> json) {
     List<Project> list = [];
-    map.forEach((key, value) {
-      list.add(Project.fromJson(value));
-    });
+
+    final List<dynamic> projectsMap = json['project'];
+
+    for (var project in projectsMap) {
+      final projectResult = Project.fromJson(project);
+      list.add(projectResult);
+    }
+
     return list;
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hatio_todo_app/presentation/project/bloc/project_bloc.dart';
 
 class CreateProjectDialog extends StatefulWidget {
   const CreateProjectDialog({super.key});
@@ -8,6 +9,15 @@ class CreateProjectDialog extends StatefulWidget {
 }
 
 class _CreateProjectDialogState extends State<CreateProjectDialog> {
+  final TextEditingController _projectNameController = TextEditingController();
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _projectNameController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     //return a bottom sheet asking for the project name and have a save or discard button
@@ -16,8 +26,9 @@ class _CreateProjectDialogState extends State<CreateProjectDialog> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const TextField(
-            decoration: InputDecoration(
+          TextField(
+            controller: _projectNameController,
+            decoration: const InputDecoration(
               hintText: 'Project Name',
             ),
           ),
@@ -30,16 +41,22 @@ class _CreateProjectDialogState extends State<CreateProjectDialog> {
               ElevatedButton(
                 onPressed: () {
                   //save the project
+                  projectBloc.add(
+                    AddProjectButtonPressed(
+                      name: _projectNameController.text,
+                    ),
+                  );
                   Navigator.of(context).pop();
                 },
-                child: Text('Save'),
+                child: const Text('Save'),
               ),
               ElevatedButton(
                 onPressed: () {
-                  //discard the project
+                  //discard the
+                  _projectNameController.clear();
                   Navigator.of(context).pop();
                 },
-                child: Text('Discard'),
+                child: const Text('Discard'),
               ),
             ],
           ),

@@ -7,16 +7,16 @@ final class ProjectInitial extends ProjectState {}
 
 final class ProjectLoading extends ProjectState {}
 
-final class ProjectSuccess extends ProjectState {
+final class ProjectLoadSuccess extends ProjectState {
   final List<Project> projects;
 
-  ProjectSuccess({required this.projects});
+  ProjectLoadSuccess({required this.projects});
 }
 
-final class ProjectFailure extends ProjectState {
+final class ProjectLoadFailure extends ProjectState {
   final String error;
 
-  ProjectFailure({required this.error});
+  ProjectLoadFailure({required this.error});
 }
 
 final class ProjectAdded extends ProjectState {

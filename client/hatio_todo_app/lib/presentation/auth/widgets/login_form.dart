@@ -50,6 +50,7 @@ class _LoginFormState extends State<LoginForm> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: TextFormField(
+              obscureText: true,
               controller: _passwordController,
               decoration: const InputDecoration(
                 labelText: 'Password',
@@ -64,12 +65,12 @@ class _LoginFormState extends State<LoginForm> {
             child: ElevatedButton(
               onPressed: () {
                 if (_loginKey.currentState!.validate()) {
-                  context.read<AuthBloc>().add(
-                        LoginButtonPressed(
-                          email: _emailController.text,
-                          password: _passwordController.text,
-                        ),
-                      );
+                  authBloc.add(
+                    LoginButtonPressed(
+                      email: _emailController.text,
+                      password: _passwordController.text,
+                    ),
+                  );
                 }
               },
               child: const Text('Login'),
@@ -82,11 +83,7 @@ class _LoginFormState extends State<LoginForm> {
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: ElevatedButton(
               onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const RegisterScreen(),
-                  ),
-                );
+                authBloc.add(GoToRegister());
               },
               child: const Text('Register'),
             ),

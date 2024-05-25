@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hatio_todo_app/presentation/auth/bloc/auth_bloc.dart';
 import 'package:hatio_todo_app/presentation/auth/views/login_screen.dart';
-import 'package:hatio_todo_app/presentation/project/views/project_screen.dart';
 
-class CustomForm extends StatefulWidget {
-  const CustomForm({super.key});
+class RegisterForm extends StatefulWidget {
+  const RegisterForm({super.key});
 
   @override
-  State<CustomForm> createState() => _CustomFormState();
+  State<RegisterForm> createState() => _RegisterFormState();
 }
 
-class _CustomFormState extends State<CustomForm> {
+class _RegisterFormState extends State<RegisterForm> {
   final _registerKey = GlobalKey<FormState>();
+
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   String? nameValidation(String? value) {
     if (value == null || value.isEmpty) {
@@ -64,6 +69,7 @@ class _CustomFormState extends State<CustomForm> {
           children: [
             TextFormField(
               validator: nameValidation,
+              controller: _nameController,
               decoration: const InputDecoration(
                 labelText: 'Name',
               ),
@@ -73,6 +79,7 @@ class _CustomFormState extends State<CustomForm> {
             ),
             TextFormField(
               validator: emailValidation,
+              controller: _emailController,
               decoration: const InputDecoration(
                 labelText: 'Email',
               ),
@@ -82,6 +89,8 @@ class _CustomFormState extends State<CustomForm> {
             ),
             TextFormField(
               validator: passwordValidation,
+              controller: _passwordController,
+              obscureText: false,
               decoration: const InputDecoration(
                 labelText: 'Password',
               ),
@@ -92,9 +101,11 @@ class _CustomFormState extends State<CustomForm> {
             ElevatedButton(
               onPressed: () {
                 if (_registerKey.currentState!.validate()) {
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => const ProjectScreen(),
+                  authBloc.add(
+                    RegisterButtonPressed(
+                      name: _nameController.text,
+                      email: _emailController.text,
+                      password: _passwordController.text,
                     ),
                   );
                 }
@@ -106,11 +117,7 @@ class _CustomFormState extends State<CustomForm> {
             ),
             TextButton(
               onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const LoginScreen(),
-                  ),
-                );
+                authBloc.add(GoToLogin());
               },
               child: const Text('Login'),
             ),

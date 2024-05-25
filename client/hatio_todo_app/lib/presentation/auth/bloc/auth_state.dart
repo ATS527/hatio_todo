@@ -5,6 +5,8 @@ sealed class AuthState {}
 
 final class AuthInitial extends AuthState {}
 
+final class AuthIdle extends AuthState {}
+
 final class AuthLoading extends AuthState {}
 
 final class AuthSuccess extends AuthState {
@@ -18,3 +20,7 @@ final class AuthFailure extends AuthState {
 
   AuthFailure({required this.message});
 }
+
+final class AuthRegister extends AuthState {}
+
+final class AuthLogin extends AuthState {}

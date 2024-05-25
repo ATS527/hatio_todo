@@ -7,11 +7,9 @@ final class InitialProjectEvent extends ProjectEvent {}
 
 final class AddProjectButtonPressed extends ProjectEvent {
   final String name;
-  final String description;
 
   AddProjectButtonPressed({
     required this.name,
-    required this.description,
   });
 }
 
