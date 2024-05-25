@@ -22,7 +22,6 @@ class UserDataProvider {
 
       return decodedResponse;
 
-      // get Map<String, dynamic> from response.body
     } catch (err) {
       throw Exception(err.toString());
     }
@@ -31,13 +30,10 @@ class UserDataProvider {
   Future<Map<String, dynamic>> loginUserData(
       String email, String password) async {
     try {
-      final response = await http.post(
-        Uri.parse('$_baseUrl/login'),
-        body: {
-          "email": email,
-          "password": password,
-        },
-      );
+      final response = await http.post(Uri.parse('$_baseUrl/login'), body: {
+        "email": email,
+        "password": password,
+      });
 
       return jsonDecode(response.body);
     } catch (err) {

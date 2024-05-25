@@ -6,8 +6,11 @@ class RegisterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: CustomForm(),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Register Screen"),
+      ),
+      body: const CustomForm(),
     );
   }
 }

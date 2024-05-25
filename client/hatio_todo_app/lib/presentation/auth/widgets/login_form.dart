@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hatio_todo_app/presentation/auth/bloc/auth_bloc.dart';
-import 'package:hatio_todo_app/presentation/project/views/project_screen.dart';
+import 'package:hatio_todo_app/presentation/auth/views/register_screen.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -72,7 +72,23 @@ class _LoginFormState extends State<LoginForm> {
                       );
                 }
               },
-              child: const Text('Submit'),
+              child: const Text('Login'),
+            ),
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const RegisterScreen(),
+                  ),
+                );
+              },
+              child: const Text('Register'),
             ),
           ),
         ],
