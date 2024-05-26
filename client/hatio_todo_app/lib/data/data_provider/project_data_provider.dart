@@ -15,7 +15,13 @@ class ProjectDataProvider {
         },
       );
 
-      return jsonDecode(response.body);
+      final result = jsonDecode(response.body);
+
+      if (result["success"] == false) {
+        throw Exception(result["message"]);
+      }
+
+      return result["success"];
     } catch (err) {
       throw Exception(err.toString());
     }
@@ -27,7 +33,13 @@ class ProjectDataProvider {
         Uri.parse('$_baseUrl/getUserProjects'),
       );
 
-      return jsonDecode(response.body);
+      final result = jsonDecode(response.body);
+
+      if (result["success"] == false) {
+        throw Exception(result["message"]);
+      }
+
+      return result["success"];
     } catch (err) {
       throw Exception(err.toString());
     }
@@ -39,7 +51,13 @@ class ProjectDataProvider {
         Uri.parse('$_baseUrl/getProjectDetails/$id'),
       );
 
-      return jsonDecode(response.body);
+      final result = jsonDecode(response.body);
+
+      if (result["success"] == false) {
+        throw Exception(result["message"]);
+      }
+
+      return result["success"];
     } catch (err) {
       throw Exception(err.toString());
     }
@@ -55,7 +73,13 @@ class ProjectDataProvider {
         },
       );
 
-      return jsonDecode(response.body);
+      final result = jsonDecode(response.body);
+
+      if (result["success"] == false) {
+        throw Exception(result["message"]);
+      }
+
+      return result["success"];
     } catch (err) {
       throw Exception(err.toString());
     }

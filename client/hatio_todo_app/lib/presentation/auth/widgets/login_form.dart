@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hatio_todo_app/presentation/auth/bloc/auth_bloc.dart';
-import 'package:hatio_todo_app/presentation/auth/views/register_screen.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});

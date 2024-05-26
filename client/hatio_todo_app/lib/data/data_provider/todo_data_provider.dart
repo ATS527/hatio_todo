@@ -17,7 +17,13 @@ class TodoDataProvider {
         },
       );
 
-      return jsonDecode(response.body);
+      final result = jsonDecode(response.body);
+
+      if (result["success"] == false) {
+        throw Exception(result["message"]);
+      }
+
+      return result["success"];
     } catch (err) {
       throw Exception(err.toString());
     }
@@ -29,7 +35,13 @@ class TodoDataProvider {
         Uri.parse('$_baseUrl/getProjectTodos/$projectId'),
       );
 
-      return jsonDecode(response.body);
+      final result = jsonDecode(response.body);
+
+      if (result["success"] == false) {
+        throw Exception(result["message"]);
+      }
+
+      return result["success"];
     } catch (err) {
       throw Exception(err.toString());
     }
@@ -45,7 +57,13 @@ class TodoDataProvider {
         },
       );
 
-      return jsonDecode(response.body);
+      final result = jsonDecode(response.body);
+
+      if (result["success"] == false) {
+        throw Exception(result["message"]);
+      }
+
+      return result["success"];
     } catch (err) {
       throw Exception(err.toString());
     }
@@ -62,7 +80,13 @@ class TodoDataProvider {
         },
       );
 
-      return jsonDecode(response.body);
+      final result = jsonDecode(response.body);
+
+      if (result["success"] == false) {
+        throw Exception(result["message"]);
+      }
+
+      return result["success"];
     } catch (err) {
       throw Exception(err.toString());
     }
