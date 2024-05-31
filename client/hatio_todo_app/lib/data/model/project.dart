@@ -39,14 +39,15 @@ class Project {
   }
 
   //from map<string,dynamic> to list
-  static List<Project> fromJsontoList(Map<String, dynamic> json) {
+  static List<Project> fromJsontoList(List<dynamic> json) {
     List<Project> list = [];
 
-    final List<dynamic> projectsMap = json['project'];
-
-    for (var project in projectsMap) {
-      final projectResult = Project.fromJson(project);
-      list.add(projectResult);
+    if (json.isNotEmpty) {
+      for (var item in json) {
+        list.add(Project.fromJson(item));
+      }
+    } else {
+      return list;
     }
 
     return list;

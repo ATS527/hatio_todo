@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class EditTodoDialog extends StatefulWidget {
-  const EditTodoDialog({super.key});
+class AddTodoDialog extends StatefulWidget {
+  const AddTodoDialog({super.key});
 
   @override
-  State<EditTodoDialog> createState() => _EditTodoDialogState();
+  State<AddTodoDialog> createState() => _AddTodoDialogState();
 }
 
-class _EditTodoDialogState extends State<EditTodoDialog> {
+class _AddTodoDialogState extends State<AddTodoDialog> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -17,11 +17,19 @@ class _EditTodoDialogState extends State<EditTodoDialog> {
         children: [
           const TextField(
             decoration: InputDecoration(
+              hintText: 'Todo Title',
+            ),
+          ),
+          const SizedBox(
+            height: 24,
+          ),
+          const TextField(
+            decoration: InputDecoration(
               hintText: 'Todo Description',
             ),
           ),
           const SizedBox(
-            height: 44,
+            height: 24,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -29,9 +37,10 @@ class _EditTodoDialogState extends State<EditTodoDialog> {
               ElevatedButton(
                 onPressed: () {
                   //save the project
+                  
                   Navigator.of(context).pop();
                 },
-                child: const Text('Save'),
+                child: const Text('Add'),
               ),
               ElevatedButton(
                 onPressed: () {

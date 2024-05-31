@@ -59,8 +59,7 @@ class StrikeThroughText extends StatefulWidget {
   final Duration duration;
 
   const StrikeThroughText(
-      {Key? key, required this.text, required this.duration})
-      : super(key: key);
+      {super.key, required this.text, required this.duration});
 
   @override
   _StrikeThroughTextState createState() => _StrikeThroughTextState();

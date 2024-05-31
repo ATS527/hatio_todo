@@ -6,5 +6,5 @@ import 'package:hatio_todo_app/bloc_observer.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = SimpleBlocObserver();
-  runApp(MyApp());
+  runApp(const MyApp());
 }

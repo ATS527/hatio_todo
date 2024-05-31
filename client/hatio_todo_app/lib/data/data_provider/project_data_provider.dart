@@ -11,7 +11,7 @@ class ProjectDataProvider {
       final response = await http.post(
         Uri.parse('$_baseUrl/createProject'),
         body: {
-          "description": title,
+          "title": title,
         },
       );
 
@@ -21,13 +21,13 @@ class ProjectDataProvider {
         throw Exception(result["message"]);
       }
 
-      return result["success"];
+      return result["project"];
     } catch (err) {
       throw Exception(err.toString());
     }
   }
 
-  Future<Map<String, dynamic>> getUserProjectsData() async {
+  Future<List<dynamic>> getUserProjectsData() async {
     try {
       final response = await http.get(
         Uri.parse('$_baseUrl/getUserProjects'),
@@ -39,7 +39,7 @@ class ProjectDataProvider {
         throw Exception(result["message"]);
       }
 
-      return result["success"];
+      return result["project"];
     } catch (err) {
       throw Exception(err.toString());
     }
@@ -57,7 +57,7 @@ class ProjectDataProvider {
         throw Exception(result["message"]);
       }
 
-      return result["success"];
+      return result["project"];
     } catch (err) {
       throw Exception(err.toString());
     }
@@ -79,7 +79,7 @@ class ProjectDataProvider {
         throw Exception(result["message"]);
       }
 
-      return result["success"];
+      return result["project"];
     } catch (err) {
       throw Exception(err.toString());
     }

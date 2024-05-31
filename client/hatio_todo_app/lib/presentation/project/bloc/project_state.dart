@@ -20,13 +20,13 @@ final class ProjectLoadFailure extends ProjectState {
 }
 
 final class ProjectAdded extends ProjectState {
-  final Project project;
+  final List<Project> projects;
 
-  ProjectAdded({required this.project});
+  ProjectAdded({required this.projects});
 }
 
 final class ProjectUpdated extends ProjectState {
-  final Project project;
+  final List<Project> projects;
 
-  ProjectUpdated({required this.project});
+  ProjectUpdated({required this.projects});
 }

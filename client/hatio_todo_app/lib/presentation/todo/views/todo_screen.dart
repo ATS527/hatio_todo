@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hatio_todo_app/data/model/project.dart';
+import 'package:hatio_todo_app/presentation/project/bloc/project_bloc.dart';
+import 'package:hatio_todo_app/presentation/todo/widgets/add_todo_dialog.dart';
 import 'package:hatio_todo_app/presentation/todo/widgets/todo_tile.dart';
 
 class TodoScreen extends StatefulWidget {
@@ -14,9 +16,13 @@ class TodoScreen extends StatefulWidget {
 class _TodoScreenState extends State<TodoScreen> {
   final TextEditingController _projectController = TextEditingController();
 
+  final GlobalKey<TooltipState> tooltipkey = GlobalKey<TooltipState>();
+
+  bool isEditing = false;
+
   @override
   void initState() {
-    _projectController.text = "Project Name";
+    _projectController.text = widget.project.title;
     super.initState();
   }
 
@@ -30,30 +36,59 @@ class _TodoScreenState extends State<TodoScreen> {
             padding: const EdgeInsets.all(16.0),
             child: IconButton(
               icon: const Icon(Icons.share),
-              onPressed: () {
-              },
+              onPressed: () {},
             ),
           ),
         ],
-        title: EditableText(
-          controller: _projectController,
-          focusNode: FocusNode(),
-          style: const TextStyle(
-            color: Colors.black,
-            fontSize: 24,
+        title: Tooltip(
+          key: tooltipkey,
+          triggerMode: TooltipTriggerMode.manual,
+          showDuration: const Duration(seconds: 1),
+          message:
+              "You can edit the project name here (Press enter after editing)",
+          child: TextField(
+            controller: _projectController,
+            onSubmitted: (value) {
+              setState(() {
+                isEditing = false;
+              });
+              projectBloc.add(
+                UpdateProject(
+                  projectId: widget.project.id,
+                  name: value,
+                ),
+              );
+            },
+            onTap: () {
+              setState(() {
+                isEditing = true;
+              });
+            },
+            decoration: const InputDecoration(
+              border: InputBorder.none,
+            ),
+            style: const TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-          showCursor: false,
-          cursorColor: Colors.black,
-          backgroundCursorColor: Colors.black,
-          onEditingComplete: () {
-          },
         ),
       ),
       body: ListView.builder(
         itemCount: 100,
         itemBuilder: (context, index) {
-          return TodoTile();
+          return const TodoTile();
         },
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            builder: (context) => const AddTodoDialog(),
+          );
+        },
+        icon: const Icon(Icons.add),
+        label: const Text("Add Todo"),
       ),
     );
   }

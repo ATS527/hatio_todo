@@ -13,7 +13,6 @@ class _CreateProjectDialogState extends State<CreateProjectDialog> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     _projectNameController.dispose();
     super.dispose();
   }
@@ -40,7 +39,6 @@ class _CreateProjectDialogState extends State<CreateProjectDialog> {
             children: [
               ElevatedButton(
                 onPressed: () {
-                  //save the project
                   projectBloc.add(
                     AddProjectButtonPressed(
                       name: _projectNameController.text,
@@ -52,7 +50,6 @@ class _CreateProjectDialogState extends State<CreateProjectDialog> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  //discard the
                   _projectNameController.clear();
                   Navigator.of(context).pop();
                 },

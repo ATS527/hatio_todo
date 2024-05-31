@@ -24,8 +24,9 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
     on<AddProjectButtonPressed>((event, emit) async {
       emit(ProjectLoading());
       try {
-        Project project = await _projectRepository.createProject(event.name);
-        emit(ProjectAdded(project: project));
+        await _projectRepository.createProject(event.name);
+        List<Project> projects = await _projectRepository.getUserProjects();
+        emit(ProjectAdded(projects: projects));
       } catch (err) {
         emit(ProjectLoadFailure(error: err.toString()));
       }
@@ -34,11 +35,14 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
     on<UpdateProject>((event, emit) async {
       emit(ProjectLoading());
       try {
-        Project project = await _projectRepository.updateProjectTitle(
+        await _projectRepository.updateProjectTitle(
           event.projectId,
           event.name,
         );
-        emit(ProjectUpdated(project: project));
+
+        List<Project> projects = await _projectRepository.getUserProjects();
+
+        emit(ProjectUpdated(projects: projects));
       } catch (err) {
         emit(ProjectLoadFailure(error: err.toString()));
       }
