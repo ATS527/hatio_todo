@@ -13,9 +13,6 @@ exports.createTodo = asyncHandler(
         });
 
         const project = await Project.findByPk(project_id);
-        if (project.todos === null) {
-            project.todos = [];
-        }
         await project.update(
             {
                 todos: [...project.todos, todo.id],

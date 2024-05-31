@@ -5,9 +5,7 @@ const asyncHandler = require('../utils/asyncHandler');
 exports.createProject = asyncHandler(
     async (req, res) => {
         const project = await Project.create(req.body);
-        if (req.user.project_ids === null) {
-            req.user.project_ids = [];
-        }
+
         await User.update(
             {
                 project_ids: [...req.user.project_ids, project.id],
@@ -16,6 +14,10 @@ exports.createProject = asyncHandler(
                 where: { id: req.user.id },
             }
         );
+
+        project.todos = [];
+        await project.save();
+        
         res.status(201).json({
             success: true,
             project,
