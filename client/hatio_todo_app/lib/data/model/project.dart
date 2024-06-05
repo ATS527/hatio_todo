@@ -14,13 +14,10 @@ class Project {
   });
 
   factory Project.fromJson(Map<String, dynamic> json) {
-    // final todoList = json["project"]["todos"];
     return Project(
       id: json['id'],
       title: json['title'],
-      todoIds: json['todoIds'] != null
-          ? List<String>.from(json['todoIds'])
-          : <String>[],
+      todoIds: json["todos"] != null ? List<String>.from(json["todos"]) : [],
       createdAt:
           json['createdAt'] != null ? DateTime.parse(json['createdAt']) : null,
       updatedAt:

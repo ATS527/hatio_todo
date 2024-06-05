@@ -2,18 +2,27 @@ class Todo {
   final String id;
   final String title;
   final bool status;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
 
   Todo({
     required this.id,
     required this.title,
     this.status = false,
+    required this.createdAt,
+    required this.updatedAt,
   });
 
   factory Todo.fromJson(Map<String, dynamic> json) {
+    print(json);
     return Todo(
-      id: json["todo"]['id'],
-      title: json["todo"]['title'],
-      status: json["todo"]['status'],
+      id: json['id'],
+      title: json['description'],
+      status: json['status'],
+      createdAt:
+          json['createdAt'] != null ? DateTime.parse(json['createdAt']) : null,
+      updatedAt:
+          json['updatedAt'] != null ? DateTime.parse(json['updatedAt']) : null,
     );
   }
 
@@ -25,11 +34,11 @@ class Todo {
     };
   }
 
-  static List<Todo> fromJsonToList(Map<String, dynamic> map) {
+  static List<Todo> fromJsonToList(List<dynamic> map) {
     List<Todo> list = [];
-    map.forEach((key, value) {
-      list.add(Todo.fromJson(value));
-    });
+    for (var item in map) {
+      list.add(Todo.fromJson(item));
+    }
     return list;
   }
 }

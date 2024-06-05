@@ -25,19 +25,33 @@ class _CreateProjectDialogState extends State<CreateProjectDialog> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          const Text(
+            'Create a new Project',
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.w800,
+            ),
+          ),
+          const SizedBox(
+            height: 60,
+          ),
           TextField(
             controller: _projectNameController,
             decoration: const InputDecoration(
               hintText: 'Project Name',
+              border: OutlineInputBorder(),
             ),
           ),
           const SizedBox(
             height: 44,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: WidgetStateProperty.all(Colors.green),
+                ),
                 onPressed: () {
                   projectBloc.add(
                     AddProjectButtonPressed(
@@ -46,14 +60,32 @@ class _CreateProjectDialogState extends State<CreateProjectDialog> {
                   );
                   Navigator.of(context).pop();
                 },
-                child: const Text('Save'),
+                child: const Padding(
+                  padding: EdgeInsets.all(14.0),
+                  child: Text(
+                    'Create',
+                    style: TextStyle(color: Colors.white, fontSize: 16),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 16,
               ),
               ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: WidgetStateProperty.all(Colors.red),
+                ),
                 onPressed: () {
                   _projectNameController.clear();
                   Navigator.of(context).pop();
                 },
-                child: const Text('Discard'),
+                child: const Padding(
+                  padding: EdgeInsets.all(14.0),
+                  child: Text(
+                    'Discard',
+                    style: TextStyle(color: Colors.white, fontSize: 16),
+                  ),
+                ),
               ),
             ],
           ),

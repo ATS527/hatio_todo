@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hatio_todo_app/presentation/auth/bloc/auth_bloc.dart';
 import 'package:hatio_todo_app/presentation/project/bloc/project_bloc.dart';
 import 'package:hatio_todo_app/presentation/project/widgets/create_project_dialog.dart';
-import 'package:hatio_todo_app/presentation/todo/views/todo_screen.dart';
+import 'package:hatio_todo_app/presentation/project/widgets/project_list_tile.dart';
 
 class ProjectScreen extends StatefulWidget {
   const ProjectScreen({super.key});
@@ -23,9 +23,11 @@ class _ProjectScreenState extends State<ProjectScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Projects'),
+        centerTitle: false,
+        title: const Text('Hatio | Projects'),
         actions: [
-          IconButton(
+          TextButton.icon(
+            label: const Text("Logout"),
             onPressed: () {
               authBloc.add(LogoutButtonPressed());
             },
@@ -100,17 +102,16 @@ class _ProjectScreenState extends State<ProjectScreen> {
     return ListView.builder(
       itemCount: state.projects.length,
       itemBuilder: (context, index) {
+        if (index == state.projects.length - 1) {
+          return Column(
+            children: [
+              ProjectListTile(project: state.projects[index]),
+              const SizedBox(height: 80),
+            ],
+          );
+        }
         final project = state.projects[index];
-        return ListTile(
-          title: Text(project.title),
-          onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => TodoScreen(project: project),
-              ),
-            );
-          },
-        );
+        return ProjectListTile(project: project);
       },
     );
   }

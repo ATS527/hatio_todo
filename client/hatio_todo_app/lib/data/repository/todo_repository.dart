@@ -12,7 +12,10 @@ class TodoRepository {
   }
 
   Future<List<Todo>> getProjectTodos(String projectId) async {
-    var response = await _todoDataProvider.getProjectTodosData(projectId);
+    List<dynamic> response =
+        await _todoDataProvider.getProjectTodosData(projectId);
+
+    print(Todo.fromJsonToList(response));
 
     return Todo.fromJsonToList(response);
   }
@@ -23,10 +26,16 @@ class TodoRepository {
     return Todo.fromJson(response);
   }
 
-  Future<bool> deleteTodoData(String projectId, String todoId) async {
+  Future<Todo> updateTodoStatus(String todoId, bool status) async {
+    var response = await _todoDataProvider.updateTodoStatus(todoId, status);
+
+    return Todo.fromJson(response);
+  }
+
+  Future<bool> deleteTodo(String projectId, String todoId) async {
     var response = await _todoDataProvider.deleteTodoData(projectId, todoId);
 
-    if (response["success"] == "true") {
+    if (response == "true") {
       return true;
     } else {
       return false;

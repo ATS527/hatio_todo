@@ -6,11 +6,11 @@ import 'package:http/http.dart' as http;
 class TodoDataProvider {
   static const _baseUrl = AppConstants.baseUrl;
 
-  Future<Map<String, dynamic>> createTodoData(
+  Future<dynamic> createTodoData(
       {required String projectId, required String title}) async {
     try {
       final response = await http.post(
-        Uri.parse('$_baseUrl/createTodo/$projectId'),
+        Uri.parse('$_baseUrl/createTodo'),
         body: {
           "description": title,
           "project_id": projectId,
@@ -23,13 +23,13 @@ class TodoDataProvider {
         throw Exception(result["message"]);
       }
 
-      return result["success"];
+      return result["todo"];
     } catch (err) {
       throw Exception(err.toString());
     }
   }
 
-  Future<Map<String, dynamic>> getProjectTodosData(String projectId) async {
+  Future<dynamic> getProjectTodosData(String projectId) async {
     try {
       final response = await http.get(
         Uri.parse('$_baseUrl/getProjectTodos/$projectId'),
@@ -41,14 +41,37 @@ class TodoDataProvider {
         throw Exception(result["message"]);
       }
 
-      return result["success"];
+      return result["todos"];
     } catch (err) {
       throw Exception(err.toString());
     }
   }
 
-  Future<Map<String, dynamic>> updateTodoData(
-      String todoId, String title) async {
+  Future<dynamic> updateTodoStatus(String todoId, bool status) async {
+    try {
+      final response = await http.put(
+        Uri.parse("$_baseUrl/updateTodo/$todoId"),
+        body: {
+          "status": status.toString(),
+        },
+      );
+
+      final result = jsonDecode(response.body);
+
+      if (result["success"] == false) {
+        throw Exception(result["message"]);
+      }
+
+      return result["todo"];
+    } catch (err) {
+      throw Exception(err.toString());
+    }
+  }
+
+  Future<dynamic> updateTodoData(
+    String todoId,
+    String title,
+  ) async {
     try {
       final response = await http.put(
         Uri.parse("$_baseUrl/updateTodo/$todoId"),
@@ -63,14 +86,13 @@ class TodoDataProvider {
         throw Exception(result["message"]);
       }
 
-      return result["success"];
+      return result["todo"];
     } catch (err) {
       throw Exception(err.toString());
     }
   }
 
-  Future<Map<String, dynamic>> deleteTodoData(
-      String projectId, String todoId) async {
+  Future<dynamic> deleteTodoData(String projectId, String todoId) async {
     try {
       final response = await http.delete(
         Uri.parse("$_baseUrl/deleteTodo"),
@@ -86,7 +108,7 @@ class TodoDataProvider {
         throw Exception(result["message"]);
       }
 
-      return result["success"];
+      return result["message"];
     } catch (err) {
       throw Exception(err.toString());
     }
