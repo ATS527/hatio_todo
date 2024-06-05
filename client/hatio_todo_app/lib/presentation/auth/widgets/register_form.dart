@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hatio_todo_app/presentation/auth/bloc/auth_bloc.dart';
+import 'package:lottie/lottie.dart';
 
 class RegisterForm extends StatefulWidget {
   const RegisterForm({super.key});
@@ -61,29 +62,42 @@ class _RegisterFormState extends State<RegisterForm> {
     return Form(
       key: _registerKey,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 156.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            SizedBox(
+                height: 260,
+                child: Lottie.asset(
+                    'assets/animations/register_todo_animation.json')),
             TextFormField(
               validator: nameValidation,
               controller: _nameController,
               decoration: const InputDecoration(
                 labelText: 'Name',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10),
+                  ),
+                ),
               ),
             ),
             const SizedBox(
-              height: 60,
+              height: 30,
             ),
             TextFormField(
               validator: emailValidation,
               controller: _emailController,
               decoration: const InputDecoration(
                 labelText: 'Email',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10),
+                  ),
+                ),
               ),
             ),
             const SizedBox(
-              height: 60,
+              height: 30,
             ),
             TextFormField(
               validator: passwordValidation,
@@ -91,12 +105,22 @@ class _RegisterFormState extends State<RegisterForm> {
               obscureText: false,
               decoration: const InputDecoration(
                 labelText: 'Password',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10),
+                  ),
+                ),
               ),
             ),
             const SizedBox(
-              height: 120,
+              height: 40,
             ),
             ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: WidgetStateProperty.all(
+                  Colors.green[200],
+                ),
+              ),
               onPressed: () {
                 if (_registerKey.currentState!.validate()) {
                   authBloc.add(
@@ -108,16 +132,49 @@ class _RegisterFormState extends State<RegisterForm> {
                   );
                 }
               },
-              child: const Text('Register'),
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 56, vertical: 12),
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  child: const Text(
+                    'Register',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.black87,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
             ),
             const SizedBox(
               height: 20,
             ),
-            TextButton(
+            ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: WidgetStateProperty.all(
+                  Colors.orange[200],
+                ),
+              ),
               onPressed: () {
                 authBloc.add(GoToLogin());
               },
-              child: const Text('Login'),
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 56, vertical: 12),
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  child: const Text(
+                    'Login',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.black87,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
             ),
           ],
         ),

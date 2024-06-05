@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hatio_todo_app/presentation/auth/bloc/auth_bloc.dart';
+import 'package:lottie/lottie.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -30,60 +31,103 @@ class _LoginFormState extends State<LoginForm> {
     return Form(
       key: _loginKey,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          Lottie.asset('assets/animations/todo_login_animation.json'),
+          const SizedBox(
+            height: 10,
+          ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 156.0),
             child: TextFormField(
               controller: _emailController,
               decoration: const InputDecoration(
                 labelText: 'Email',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10),
+                  ),
+                ),
               ),
               validator: emailValidation,
             ),
           ),
           const SizedBox(
-            height: 16,
+            height: 36,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 156.0),
             child: TextFormField(
               obscureText: true,
               controller: _passwordController,
               decoration: const InputDecoration(
                 labelText: 'Password',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10),
+                  ),
+                ),
               ),
             ),
           ),
           const SizedBox(
-            height: 16,
+            height: 36,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: ElevatedButton(
-              onPressed: () {
-                if (_loginKey.currentState!.validate()) {
-                  authBloc.add(
-                    LoginButtonPressed(
-                      email: _emailController.text,
-                      password: _passwordController.text,
-                    ),
-                  );
-                }
-              },
-              child: const Text('Login'),
+          ElevatedButton(
+            style: ButtonStyle(
+              backgroundColor: WidgetStateProperty.all(
+                Colors.orange[200],
+              ),
+            ),
+            onPressed: () {
+              if (_loginKey.currentState!.validate()) {
+                authBloc.add(
+                  LoginButtonPressed(
+                    email: _emailController.text,
+                    password: _passwordController.text,
+                  ),
+                );
+              }
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 56, vertical: 12),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width * 0.5,
+                child: const Text(
+                  'Login',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
             ),
           ),
           const SizedBox(
-            height: 16,
+            height: 26,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: ElevatedButton(
-              onPressed: () {
-                authBloc.add(GoToRegister());
-              },
-              child: const Text('Register'),
+          ElevatedButton(
+            style: ButtonStyle(
+              backgroundColor: WidgetStateProperty.all(
+                Colors.green[200],
+              ),
+            ),
+            onPressed: () {
+              authBloc.add(GoToRegister());
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 56, vertical: 12),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width * 0.5,
+                child: const Text(
+                  'Register',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.black87,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
             ),
           ),
         ],
