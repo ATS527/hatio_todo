@@ -129,6 +129,7 @@ $completed
         bloc: todoBloc,
         listener: (context, state) {
           if (state is TodoLoadFailure) {
+            ScaffoldMessenger.of(context).hideCurrentSnackBar();
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text('Something went wrong! ${state.error}'),
@@ -136,6 +137,7 @@ $completed
             );
           }
           if (state is TodoAdded) {
+            ScaffoldMessenger.of(context).hideCurrentSnackBar();
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: Text('Todo Added!'),
@@ -143,6 +145,7 @@ $completed
             );
           }
           if (state is TodoUpdated) {
+            ScaffoldMessenger.of(context).hideCurrentSnackBar();
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: Text('Todo Updated!'),
@@ -150,6 +153,7 @@ $completed
             );
           }
           if (state is TodoDeleted) {
+            ScaffoldMessenger.of(context).hideCurrentSnackBar();
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: Text('Todo Deleted!'),
@@ -208,22 +212,25 @@ $completed
       );
     } else {
       todoList = todos;
-      return ListView.builder(
-        itemCount: state.todos.length,
-        itemBuilder: (context, index) {
-          if (index == state.todos.length - 1) {
-            return Column(
-              children: [
-                TodoTile(todo: todos[index], projectId: widget.project.id),
-                const SizedBox(height: 80),
-              ],
+      return Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: ListView.builder(
+          itemCount: state.todos.length,
+          itemBuilder: (context, index) {
+            if (index == state.todos.length - 1) {
+              return Column(
+                children: [
+                  TodoTile(todo: todos[index], projectId: widget.project.id),
+                  const SizedBox(height: 80),
+                ],
+              );
+            }
+            return TodoTile(
+              todo: todos[index],
+              projectId: widget.project.id,
             );
-          }
-          return TodoTile(
-            todo: todos[index],
-            projectId: widget.project.id,
-          );
-        },
+          },
+        ),
       );
     }
   }

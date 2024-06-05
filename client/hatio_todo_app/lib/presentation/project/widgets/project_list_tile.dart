@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hatio_todo_app/data/model/project.dart';
 import 'package:hatio_todo_app/presentation/todo/views/todo_screen.dart';
+import 'package:lottie/lottie.dart';
 
 class ProjectListTile extends StatefulWidget {
   const ProjectListTile({super.key, required this.project});
@@ -32,20 +33,8 @@ class _ProjectListTileState extends State<ProjectListTile> {
           child: ListTile(
             contentPadding:
                 const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
-            leading: CircleAvatar(
-              backgroundColor: Colors.red,
-              radius: 30,
-              backgroundImage: const AssetImage(
-                "assets/images/list_bullet.jpg",
-              ),
-              onBackgroundImageError: (exception, stackTrace) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text("Error loading image"),
-                  ),
-                );
-              },
-            ),
+            leading:
+                Lottie.asset("assets/animations/project_bullet_animation.json"),
             title: Text(
               widget.project.title,
               style: const TextStyle(

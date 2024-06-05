@@ -31,6 +31,7 @@ class InitialiserScreen extends StatelessWidget {
       bloc: authBloc,
       listener: (context, state) {
         if (state is AuthFailure) {
+          ScaffoldMessenger.of(context).hideCurrentSnackBar();
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(state.message),

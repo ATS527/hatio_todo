@@ -40,6 +40,7 @@ class _ProjectScreenState extends State<ProjectScreen> {
         listener: (context, state) {
           if (state is ProjectUpdated) {
             setState(() {});
+            ScaffoldMessenger.of(context).hideCurrentSnackBar();
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: Text('Project updated successfully!'),
@@ -47,12 +48,14 @@ class _ProjectScreenState extends State<ProjectScreen> {
             );
           } else if (state is ProjectAdded) {
             setState(() {});
+            ScaffoldMessenger.of(context).hideCurrentSnackBar();
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: Text('Project added successfully!'),
               ),
             );
           } else if (state is ProjectLoadFailure) {
+            ScaffoldMessenger.of(context).hideCurrentSnackBar();
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text('Something went wrong! ${state.error}'),
@@ -99,20 +102,23 @@ class _ProjectScreenState extends State<ProjectScreen> {
   }
 
   Widget listBuilder(state) {
-    return ListView.builder(
-      itemCount: state.projects.length,
-      itemBuilder: (context, index) {
-        if (index == state.projects.length - 1) {
-          return Column(
-            children: [
-              ProjectListTile(project: state.projects[index]),
-              const SizedBox(height: 80),
-            ],
-          );
-        }
-        final project = state.projects[index];
-        return ProjectListTile(project: project);
-      },
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: ListView.builder(
+        itemCount: state.projects.length,
+        itemBuilder: (context, index) {
+          if (index == state.projects.length - 1) {
+            return Column(
+              children: [
+                ProjectListTile(project: state.projects[index]),
+                const SizedBox(height: 80),
+              ],
+            );
+          }
+          final project = state.projects[index];
+          return ProjectListTile(project: project);
+        },
+      ),
     );
   }
 }
