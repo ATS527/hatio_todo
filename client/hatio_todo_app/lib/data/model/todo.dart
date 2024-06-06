@@ -1,17 +1,23 @@
-class Todo {
+import 'package:equatable/equatable.dart';
+
+class Todo extends Equatable {
   final String id;
   final String title;
   final bool status;
   final DateTime? createdAt;
   final DateTime? updatedAt;
 
-  Todo({
+  const Todo({
     required this.id,
     required this.title,
     this.status = false,
     required this.createdAt,
     required this.updatedAt,
   });
+
+  @override
+  List<Object> get props =>
+      [id, title, status, createdAt ?? "", updatedAt ?? ""];
 
   factory Todo.fromJson(Map<String, dynamic> json) {
     print(json);

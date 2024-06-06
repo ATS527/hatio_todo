@@ -1,4 +1,6 @@
-class User {
+import 'package:equatable/equatable.dart';
+
+class User extends Equatable {
   final String id;
   final String name;
   final String email;
@@ -6,7 +8,7 @@ class User {
   final List<String> projectIds;
   final DateTime createdAt;
 
-  User({
+  const User({
     required this.id,
     required this.name,
     required this.email,
@@ -14,6 +16,9 @@ class User {
     required this.projectIds,
     required this.createdAt,
   });
+
+  @override
+  List<Object> get props => [id, name, email, password, projectIds, createdAt];
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(

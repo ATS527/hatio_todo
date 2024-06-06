@@ -64,7 +64,7 @@ class _CreateProjectDialogState extends State<CreateProjectDialog> {
               children: [
                 ElevatedButton(
                   style: ButtonStyle(
-                    backgroundColor: WidgetStateProperty.all(Colors.green[500]),
+                    backgroundColor: WidgetStateProperty.all(Colors.green[200]),
                   ),
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
@@ -81,9 +81,9 @@ class _CreateProjectDialogState extends State<CreateProjectDialog> {
                     child: Text(
                       'Create',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Colors.black,
                         fontSize: 16,
-                        fontWeight: FontWeight.bold,
+                        // fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
@@ -93,7 +93,8 @@ class _CreateProjectDialogState extends State<CreateProjectDialog> {
                 ),
                 ElevatedButton(
                   style: ButtonStyle(
-                    backgroundColor: WidgetStateProperty.all(Colors.redAccent),
+                    backgroundColor:
+                        WidgetStateProperty.all(Colors.orange[200]),
                   ),
                   onPressed: () {
                     _projectNameController.clear();
@@ -104,9 +105,9 @@ class _CreateProjectDialogState extends State<CreateProjectDialog> {
                     child: Text(
                       'Discard',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Colors.black,
                         fontSize: 16,
-                        fontWeight: FontWeight.bold,
+                        // fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),

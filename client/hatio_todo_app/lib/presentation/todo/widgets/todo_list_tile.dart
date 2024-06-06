@@ -78,13 +78,17 @@ class _TodoTileState extends State<TodoTile> {
             title: TextField(
               controller: _nameController,
               onSubmitted: (value) {
-                todoBloc.add(
-                  UpdateTodo(
-                    projectId: widget.projectId,
-                    name: value,
-                    todoId: widget.todo.id,
-                  ),
-                );
+                if (value.isNotEmpty) {
+                  todoBloc.add(
+                    UpdateTodo(
+                      projectId: widget.projectId,
+                      name: value,
+                      todoId: widget.todo.id,
+                    ),
+                  );
+                } else {
+                  _nameController.text = widget.todo.title;
+                }
               },
               decoration: const InputDecoration(
                 hintText: 'Update Todo Name',

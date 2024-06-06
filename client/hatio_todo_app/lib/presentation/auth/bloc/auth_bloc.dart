@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:hatio_todo_app/data/model/user.dart';
 import 'package:hatio_todo_app/data/repository/user_repository.dart';
 import 'package:meta/meta.dart';
@@ -19,6 +20,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthIdle());
       }
     });
+    
     on<RegisterButtonPressed>((event, emit) async {
       emit(AuthLoading());
       try {
@@ -32,6 +34,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthFailure(message: e.toString()));
       }
     });
+
     on<LoginButtonPressed>((event, emit) async {
       emit(AuthLoading());
       try {
@@ -44,6 +47,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthFailure(message: e.toString()));
       }
     });
+
     on<LogoutButtonPressed>((event, emit) async {
       emit(AuthLoading());
       try {

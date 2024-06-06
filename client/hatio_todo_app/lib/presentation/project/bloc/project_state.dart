@@ -1,7 +1,10 @@
 part of 'project_bloc.dart';
 
 @immutable
-sealed class ProjectState {}
+sealed class ProjectState extends Equatable {
+  @override
+  List<Object> get props => [];
+}
 
 final class ProjectInitial extends ProjectState {}
 

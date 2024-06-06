@@ -61,7 +61,7 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
               children: [
                 ElevatedButton(
                   style: ButtonStyle(
-                    backgroundColor: WidgetStateProperty.all(Colors.green),
+                    backgroundColor: WidgetStateProperty.all(Colors.green[200]),
                   ),
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
@@ -79,9 +79,9 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
                     child: Text(
                       'Add Todo',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Colors.black,
                         fontSize: 16,
-                        fontWeight: FontWeight.bold,
+                        // fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
@@ -91,7 +91,8 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
                 ),
                 ElevatedButton(
                   style: ButtonStyle(
-                    backgroundColor: WidgetStateProperty.all(Colors.redAccent),
+                    backgroundColor:
+                        WidgetStateProperty.all(Colors.orange[200]),
                   ),
                   onPressed: () {
                     //discard the project
@@ -102,9 +103,9 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
                     child: Text(
                       'Discard',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Colors.black,
                         fontSize: 16,
-                        fontWeight: FontWeight.bold,
+                        // fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),

@@ -1,17 +1,23 @@
-class Project {
+import 'package:equatable/equatable.dart';
+
+class Project extends Equatable {
   final String id;
   final String title;
   final List<String>? todoIds;
   final DateTime? createdAt;
   final DateTime? updatedAt;
 
-  Project({
+  const Project({
     required this.id,
     required this.title,
     this.todoIds,
     this.createdAt,
     this.updatedAt,
   });
+
+  @override
+  List<Object> get props =>
+      [id, title, todoIds ?? [], createdAt ?? "", updatedAt ?? ""];
 
   factory Project.fromJson(Map<String, dynamic> json) {
     return Project(
