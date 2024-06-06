@@ -8,5 +8,5 @@ void main() {
     });
   });
 
-  // All Other Tests could not be conducted since the API uses cookie to fetch the jwt access token to authenticate the user.
+  // All Other Tests could not be conducted since the API uses cookie to fetch the jwt access token to authenticate the user (for better security).
 }

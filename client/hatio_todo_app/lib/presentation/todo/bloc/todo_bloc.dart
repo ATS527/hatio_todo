@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:hatio_todo_app/data/model/todo.dart';
 import 'package:hatio_todo_app/data/repository/todo_repository.dart';
 import 'package:meta/meta.dart';
