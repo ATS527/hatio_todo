@@ -80,3 +80,19 @@ exports.getUserProfile = asyncHandler(
         });
     }
 );
+
+//for testing purpose
+exports.deleteUser = asyncHandler(
+    async (req, res) => {
+        await User.destroy({
+            where: {
+                id: req.params.id,
+            },
+        });
+
+        res.status(200).json({
+            success: true,
+            message: "User deleted",
+        });
+    }
+);

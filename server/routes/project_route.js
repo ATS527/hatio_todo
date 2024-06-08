@@ -8,7 +8,8 @@ const {
     createProject,
     getUserProjects,
     getProjectDetails,
-    updateProjectTitle
+    updateProjectTitle,
+    deleteProject
 } = require('../controllers/project_controller');
 
 projectRouter.post('/createProject', isAuthenticatedUser, createProject);
@@ -19,5 +20,6 @@ projectRouter.get('/getProjectDetails/:id', isAuthenticatedUser, getProjectDetai
 
 projectRouter.put('/updateProjectTitle/:id', isAuthenticatedUser, updateProjectTitle);
 
-module.exports = projectRouter;
+projectRouter.delete('/deleteProject/:id', isAuthenticatedUser, deleteProject);
 
+module.exports = projectRouter;

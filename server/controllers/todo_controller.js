@@ -8,6 +8,20 @@ exports.createTodo = asyncHandler(
             description,
             project_id
         } = req.body;
+
+        const todoExists = await Todo.findOne({
+            where: {
+                description,
+            },
+        });
+
+        if (todoExists) {
+            return res.status(400).json({
+                success: false,
+                message: "Todo already exists",
+            });
+        }
+
         const todo = await Todo.create({
             description,
         });
@@ -31,18 +45,11 @@ exports.getProjectTodos = asyncHandler(
             attributes: ["todos"],
         });
 
-        if (!projectTodos) {
-            return res.status(404).json({
-                success: false,
-                message: "Project is empty",
-            });
-        }
-
         const todos = [];
 
         for (let i = 0; i < projectTodos.todos.length; i++) {
             const todo = await Todo.findByPk(projectTodos.todos[i], {
-                attributes: ["id", "description", "status"],
+                attributes: ["id", "description", "status", "updatedAt"],
             });
             todos.push(todo);
         }

@@ -4,6 +4,20 @@ const asyncHandler = require('../utils/asyncHandler');
 
 exports.createProject = asyncHandler(
     async (req, res) => {
+
+        const projectExists = await Project.findOne({
+            where: {
+                title: req.body.title,
+            },
+        });
+
+        if (projectExists) {
+            return res.status(400).json({
+                success: false,
+                message: "Project already exists",
+            });
+        }
+
         const project = await Project.create(req.body);
 
         await User.update(
@@ -17,7 +31,7 @@ exports.createProject = asyncHandler(
 
         project.todos = [];
         await project.save();
-        
+
         res.status(201).json({
             success: true,
             project,
@@ -44,7 +58,7 @@ exports.getUserProjects = asyncHandler(
 
         for (let i = 0; i < userProjects.project_ids.length; i++) {
             const projectOne = await Project.findByPk(userProjects.project_ids[i], {
-                attributes: ["id", "title"],
+                attributes: ["id", "title", "updatedAt", "todos"],
             });
             project.push(projectOne);
         }
@@ -85,6 +99,26 @@ exports.updateProjectTitle = asyncHandler(
         res.status(200).json({
             success: true,
             project,
+        });
+    }
+);
+
+exports.deleteProject = asyncHandler(
+    async (req, res) => {
+        const project = await Project.findByPk(req.params.id);
+
+        if (project === null) {
+            return res.status(404).json({
+                success: false,
+                message: "Project not found",
+            });
+        }
+
+        await project.destroy();
+
+        res.status(200).json({
+            success: true,
+            message: "Project deleted",
         });
     }
 );

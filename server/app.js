@@ -15,10 +15,25 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 
-app.use(cors({
-    origin: ["http://localhost:5270", "http://127.0.0.1:5270", "http://locahost:8200", "http://127.0.0.1:8200"],
-    credentials: true
-}));
+const corsOptions = {
+    origin: 'http://127.0.0.1:8200', // Specify the allowed origin
+    credentials: true, // Allow credentials
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Allowed methods
+    allowedHeaders: 'Origin,X-Requested-With,Content-Type,Accept,Authorization', // Allowed headers
+};
+
+app.use(cors(corsOptions));
+
+app.options('*', cors(corsOptions));
+
+// Add headers before the routes are defined
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', 'http://localhost:8200'); // Update to match the origin you will make the request from
+    res.header('Access-Control-Allow-Credentials', 'true');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+    next();
+});
 
 app.use("/api/v2", userRouter);
 app.use("/api/v2", projectRouter);
