@@ -121,6 +121,7 @@ void main() {
         wait: const Duration(seconds: 1),
         expect: () => [TodoLoading(), TodoDeleted(todos: const [])],
         tearDown: () async {
+          //wiping up all the testing data in database
           await projectDataProvider.deleteProjectData(projectId);
           await userDataProvider.deleteUser(userId);
         });
