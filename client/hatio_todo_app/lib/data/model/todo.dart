@@ -20,7 +20,6 @@ class Todo extends Equatable {
       [id, title, status, createdAt ?? "", updatedAt ?? ""];
 
   factory Todo.fromJson(Map<String, dynamic> json) {
-    print(json);
     return Todo(
       id: json['id'],
       title: json['description'],

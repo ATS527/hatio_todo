@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:hatio_todo_app/globals.dart';
 import 'package:hatio_todo_app/utils/globals.dart';
 import 'package:http/http.dart' as http;
 
@@ -62,6 +63,9 @@ class UserDataProvider {
         throw Exception(result["message"]);
       }
 
+      //for testing only
+      jwtKey = "";
+
       return result["success"];
     } catch (err) {
       throw Exception(err.toString());
@@ -72,6 +76,24 @@ class UserDataProvider {
     try {
       final response = await http.get(
         Uri.parse('$_baseUrl/me'),
+        headers: {
+          "authorization": jwtKey,
+        },
+      );
+
+      return jsonDecode(response.body);
+    } catch (err) {
+      throw Exception(err.toString());
+    }
+  }
+
+  Future<Map<String, dynamic>> deleteUser(String userId) async {
+    try {
+      final response = await http.delete(
+        Uri.parse('$_baseUrl/deleteUser/$userId'),
+        headers: {
+          "authorization": jwtKey,
+        },
       );
 
       return jsonDecode(response.body);

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:hatio_todo_app/globals.dart';
 import 'package:hatio_todo_app/utils/globals.dart';
 import 'package:http/http.dart' as http;
 
@@ -12,6 +13,9 @@ class ProjectDataProvider {
         Uri.parse('$_baseUrl/createProject'),
         body: {
           "title": title,
+        },
+        headers: {
+          "authorization": jwtKey,
         },
       );
 
@@ -31,6 +35,9 @@ class ProjectDataProvider {
     try {
       final response = await http.get(
         Uri.parse('$_baseUrl/getUserProjects'),
+        headers: {
+          "authorization": jwtKey,
+        },
       );
 
       final result = jsonDecode(response.body);
@@ -49,6 +56,9 @@ class ProjectDataProvider {
     try {
       final response = await http.get(
         Uri.parse('$_baseUrl/getProjectDetails/$id'),
+        headers: {
+          "authorization": jwtKey,
+        },
       );
 
       final result = jsonDecode(response.body);
@@ -71,6 +81,9 @@ class ProjectDataProvider {
         body: {
           "title": title,
         },
+        headers: {
+          "authorization": jwtKey,
+        },
       );
 
       final result = jsonDecode(response.body);
@@ -82,6 +95,29 @@ class ProjectDataProvider {
       return result["project"];
     } catch (err) {
       throw Exception(err.toString());
+    }
+  }
+
+  Future<Map<String, dynamic>> deleteProjectData(String projectId) async {
+    try {
+      final response = await http.delete(
+        Uri.parse('$_baseUrl/deleteProject/$projectId'),
+        headers: {
+          "authorization": jwtKey,
+        },
+      );
+
+      final result = jsonDecode(response.body);
+
+      if (result["success"] == false) {
+        throw Exception(result["message"]);
+      }
+
+      return result;
+    } catch (err) {
+      throw Exception(
+        err.toString(),
+      );
     }
   }
 }

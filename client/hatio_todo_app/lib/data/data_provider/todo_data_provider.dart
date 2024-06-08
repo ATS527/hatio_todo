@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:hatio_todo_app/globals.dart';
 import 'package:hatio_todo_app/utils/globals.dart';
 import 'package:http/http.dart' as http;
 
@@ -14,6 +15,9 @@ class TodoDataProvider {
         body: {
           "description": title,
           "project_id": projectId,
+        },
+        headers: {
+          "authorization": jwtKey,
         },
       );
 
@@ -33,6 +37,9 @@ class TodoDataProvider {
     try {
       final response = await http.get(
         Uri.parse('$_baseUrl/getProjectTodos/$projectId'),
+        headers: {
+          "authorization": jwtKey,
+        },
       );
 
       final result = jsonDecode(response.body);
@@ -53,6 +60,9 @@ class TodoDataProvider {
         Uri.parse("$_baseUrl/updateTodo/$todoId"),
         body: {
           "status": status.toString(),
+        },
+        headers: {
+          "authorization": jwtKey,
         },
       );
 
@@ -78,6 +88,9 @@ class TodoDataProvider {
         body: {
           "description": title,
         },
+        headers: {
+          "authorization": jwtKey,
+        },
       );
 
       final result = jsonDecode(response.body);
@@ -99,6 +112,9 @@ class TodoDataProvider {
         body: {
           "project_id": projectId,
           "todo_id": todoId,
+        },
+        headers: {
+          "authorization": jwtKey,
         },
       );
 

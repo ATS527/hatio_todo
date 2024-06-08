@@ -15,7 +15,6 @@ class TodoRepository {
     List<dynamic> response =
         await _todoDataProvider.getProjectTodosData(projectId);
 
-    print(Todo.fromJsonToList(response));
 
     return Todo.fromJsonToList(response);
   }

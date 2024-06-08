@@ -12,10 +12,13 @@ void main() {
         RegisterButtonPressed(
           name: "Anonymous",
           email: "newUser@gmail.com",
-          password: "strongPassword#123",
+          password: "strongPassword#123"
         ),
       ),
       expect: () => [AuthLoading(), AuthSuccess()],
+      tearDown: () {
+        
+      }
     );
 
     blocTest(
