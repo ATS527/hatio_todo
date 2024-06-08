@@ -15,8 +15,12 @@ class ProjectScreen extends StatefulWidget {
 class _ProjectScreenState extends State<ProjectScreen> {
   @override
   void initState() {
-    projectBloc.add(InitialProjectEvent());
+    initialisationCode();
     super.initState();
+  }
+
+  void initialisationCode() {
+    projectBloc.add(InitialProjectEvent());
   }
 
   @override
@@ -110,7 +114,10 @@ class _ProjectScreenState extends State<ProjectScreen> {
           if (index == state.projects.length - 1) {
             return Column(
               children: [
-                ProjectListTile(project: state.projects[index]),
+                ProjectListTile(
+                  project: state.projects[index],
+                  initialisationCode: initialisationCode,
+                ),
                 const SizedBox(height: 80),
               ],
             );

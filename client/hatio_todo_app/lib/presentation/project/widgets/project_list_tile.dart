@@ -4,9 +4,11 @@ import 'package:hatio_todo_app/presentation/todo/views/todo_screen.dart';
 import 'package:lottie/lottie.dart';
 
 class ProjectListTile extends StatefulWidget {
-  const ProjectListTile({super.key, required this.project});
+  const ProjectListTile(
+      {super.key, required this.project, this.initialisationCode});
 
   final Project project;
+  final VoidCallback? initialisationCode;
 
   @override
   State<ProjectListTile> createState() => _ProjectListTileState();
@@ -57,7 +59,7 @@ class _ProjectListTileState extends State<ProjectListTile> {
                   },
                 ),
               ).then((_) {
-                setState(() {});
+                widget.initialisationCode!();
               });
             },
             //show timestamp
