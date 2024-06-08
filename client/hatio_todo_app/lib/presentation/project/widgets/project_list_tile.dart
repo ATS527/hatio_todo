@@ -56,7 +56,9 @@ class _ProjectListTileState extends State<ProjectListTile> {
                     return TodoScreen(project: widget.project);
                   },
                 ),
-              );
+              ).then((_) {
+                setState(() {});
+              });
             },
             //show timestamp
             trailing: Text(
