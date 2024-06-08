@@ -16,7 +16,8 @@ A Web Application Submission as part of Take Home Challenge by Hatio.
 
  ## About The Project
 
-![Working of Application with setup](https://www.youtube.com/watch?v=SCIfWhAheVw)
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/yr53kaMzu50/0.jpg)](https://www.youtube.com/watch?v=yr53kaMzu50)
+
 
 This project is a comprehensive task management application developed using Flutter for the frontend and Node.js for the backend, with PostgreSQL serving as the database. Sequelize is employed as the ORM to facilitate database operations. For state management, the Bloc library is utilized, enabling a structured flow of events and states to control the application's logic. Users can register and log in to the application, with authentication managed through JWT and cookies. Once authenticated, users can create and manage projects, each of which can have multiple to-dos. Users can update project names, add new to-dos, edit existing ones, delete them, and even export a summary of their to-dos in the form of a GitHub README markdown file. This functionality ensures a seamless and organized approach to task management, with a robust authentication mechanism to secure user data and actions.
  ### Built With
