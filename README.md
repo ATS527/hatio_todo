@@ -72,6 +72,16 @@ Inorder to run the application you should install the following:
     flutter pub get
     flutter run -d chrome --web-hostname=127.0.0.1 --web-port=8200
     ```
+
+ ## Testing
+
+   ```sh
+   cd client/hatio-todo-app/test/presentation
+   flutter test test/presentation/auth/bloc/auth_bloc_test.dart
+   flutter test test/presentation/project/bloc/project_bloc_test.dart
+   flutter test test/presentation/todo/bloc/todo_bloc_test.dart
+
+   ```
  ## Acknowledgments
 
 Opensource packages that i used for building the application. Listed packages are hosted in pub.dev and npm.
